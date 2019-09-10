@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import <Photos/Photos.h>
 #import "ProcessVideoViewController.h"
+#import "BFAVPlayerViewController.h"
+#import "SimpleVideoFileFilterViewController.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -135,6 +137,11 @@
     ProcessVideoViewController *viewControllr = [[ProcessVideoViewController alloc]init];
     viewControllr.filePath = _selectFile;
     [self.navigationController pushViewController:viewControllr animated:YES];
+}
+- (IBAction)play:(id)sender {
+    SimpleVideoFileFilterViewController *player = [[SimpleVideoFileFilterViewController alloc]init];
+    player.videoPath = _selectFile;
+    [self.navigationController pushViewController:player animated:YES];
 }
 
 
