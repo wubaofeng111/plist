@@ -7,7 +7,7 @@
 //
 
 #import "ProcessVideoViewController.h"
-
+#import "RecoderFileItem.h"
 #import "AECollectionViewCell.h"
 #import "ProcTableViewCell.h"
 
@@ -106,6 +106,12 @@ static NSCache *mCashe = nil;
     BOOL                   startCorver;
     
     NSMutableArray         *cutsections;
+    
+    NSTimer                *timer;
+    
+    
+    __weak IBOutlet UILabel *mTagView;
+    
 }
 @property(nonatomic,assign)CGRect frame;
 @property(nonatomic,assign)CGRect bounds;
@@ -247,6 +253,9 @@ static NSCache *mCashe = nil;
         
         [item LoadImage];
     }
+    if (!startCorver) {
+        [cell setCorverWithStartPoint:item.startPoint EndPoint:item.endPoint];
+    }
 
     
     return cell;
@@ -322,34 +331,35 @@ static NSCache *mCashe = nil;
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView == mainView) {
-        
-        if (!startCorver) {
-            return;
-        }
-        NSArray *visiCells = [mainView visibleCells];
-        AECollectionViewCell *cell = nil;
-        CGRect cellFrame;
-        CGRect viewFrame = TagView.frame;
-        
-        
-        
-        CGPoint pt1 = CGPointMake(CGRectGetMinX(viewFrame), CGRectGetMidY(viewFrame));
-        CGPoint pt2 = CGPointMake(CGRectGetMaxX(viewFrame), CGRectGetMidY(viewFrame));
-        for (UIView *view in visiCells) {
-            CGRect frame = [mainView convertRect:view.frame toView:self.view];
-            
-            if (CGRectContainsPoint(frame, pt1)||CGRectContainsPoint(frame, pt2)) {
-                cell = (AECollectionViewCell*)view;
-                cellFrame = frame;
-                break;
-            }
-        }
-        
-        
-        [cell setCorver:viewFrame.origin.x - cellFrame.origin.x];
-        
-    }
+//    if (scrollView == mainView) {
+//        
+//        if (!startCorver) {
+//            return;
+//        }
+//        NSArray *visiCells = [mainView visibleCells];
+//        NSIndexPath *startIndex = nil;
+//        AECollectionViewCell *cell = nil;
+//        CGRect cellFrame;
+//        CGRect viewFrame = TagView.frame;
+//        
+//        
+//        
+//        CGPoint pt1 = CGPointMake(CGRectGetMinX(viewFrame), CGRectGetMidY(viewFrame));
+//        CGPoint pt2 = CGPointMake(CGRectGetMaxX(viewFrame), CGRectGetMidY(viewFrame));
+//        for (UIView *view in visiCells) {
+//            CGRect frame = [mainView convertRect:view.frame toView:self.view];
+//            
+//            if (CGRectContainsPoint(frame, pt1)||CGRectContainsPoint(frame, pt2)) {
+//                cell = (AECollectionViewCell*)view;
+//                cellFrame = frame;
+//                break;
+//            }
+//        }
+//        
+//        
+//        [cell setCorver:viewFrame.origin.x - cellFrame.origin.x];
+//        
+//    }
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -370,6 +380,7 @@ static NSCache *mCashe = nil;
     
     AVAssetExportSessionItem *item = [cutsections objectAtIndex:indexPath.row];
     item.cell = cell;
+    
     
     return cell;
 }
@@ -423,13 +434,132 @@ static NSCache *mCashe = nil;
     
 }
 
+static RecoderFileItem *pRecoderFileItem = nil;
+
+
 - (IBAction)startCorver:(id)sender {
-//    startCorver = !startCorver;
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 800, 100)];
-    view.backgroundColor = [UIColor redColor];
-    [mainView addSubview:view];
+    startCorver = !startCorver;
+    
+    if (startCorver) {
+        mainView.scrollEnabled = NO;
+        pRecoderFileItem = [[RecoderFileItem alloc]init];
+        NSArray *visCells = [mainView visibleCells];
+        
+        CGPoint center = TagView.center;
+        NSIndexPath *indexPath = nil;
+        
+        for (AECollectionViewCell *cell in visCells) {
+            CGRect frame = [mainView convertRect:cell.frame toView:self.view];
+            if (CGRectContainsPoint(frame, center)) {
+                
+                
+                indexPath = [mainView indexPathForCell:cell];
+                
+                ProcessVideoItem *item = [_proviewImgItems objectAtIndex:indexPath.row];
+                if (item.recType != RecoderType_None) {
+                    pRecoderFileItem = nil;
+                    /// 已经录制了，配音不要重复
+                    mainView.scrollEnabled = YES;
+                    return;
+                }
+
+                pRecoderFileItem.startCell = cell;
+                pRecoderFileItem.startIndex = indexPath;
+                CGFloat midX = CGRectGetMidX(self.frame);
+                pRecoderFileItem.startPoint = midX - CGRectGetMinX(frame);
+                pRecoderFileItem.curentCell = cell;
+                pRecoderFileItem.curentIndex = indexPath;
+                
+                break;
+            }
+        }
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(StartRecoder) userInfo:nil repeats:YES];
+        
+    }else{
+        mainView.scrollEnabled = YES;
+        NSArray *visCells = [mainView visibleCells];
+        CGPoint center = TagView.center;
+        NSIndexPath *indexPath = nil;
+        for (AECollectionViewCell *cell in visCells) {
+            CGRect frame = [mainView convertRect:cell.frame toView:self.view];
+            if (CGRectContainsPoint(frame, center)) {
+                
+                indexPath = [mainView indexPathForCell:cell];
+                pRecoderFileItem.endCell = cell;
+                pRecoderFileItem.endIndex = indexPath;
+                CGFloat midX = CGRectGetMidX(self.frame);
+                pRecoderFileItem.endPoint = midX - CGRectGetMinX(frame);
+                pRecoderFileItem.curentCell = cell;
+                pRecoderFileItem.curentIndex = indexPath;
+                
+                ProcessVideoItem *item = [_proviewImgItems objectAtIndex:pRecoderFileItem.curentIndex.row];
+                item.startPoint = 0;
+                item.endPoint   = pRecoderFileItem.endPoint;
+                item.recType    = RecoderType_End;
+                
+                
+                break;
+            }
+        }
+        
+        
+        [timer invalidate];
+        timer = nil;
+    }
+    
+    
+
 }
 
+
+-(void)StartRecoder
+{
+    CGFloat midX = CGRectGetMidX(self.frame);
+    mainView.contentOffset = CGPointMake(mainView.contentOffset.x+1, 0);
+    CGRect frame = pRecoderFileItem.curentCell.frame;
+    CGRect trFrame = [mainView convertRect:frame toView:self.view];
+    
+    if (CGRectGetMaxX(trFrame)<midX) {
+        /// 升级
+        /// 处理前一个Cell
+        
+        if (pRecoderFileItem.curentIndex.row == pRecoderFileItem.startIndex.row) {
+            // 开始坐标
+            ProcessVideoItem *item = [_proviewImgItems objectAtIndex:pRecoderFileItem.curentIndex.row];
+            item.startPoint = pRecoderFileItem.startPoint;
+            item.endPoint   = CGRectGetWidth(trFrame);
+            item.recType    = RecoderType_Start;
+            [pRecoderFileItem.curentCell setCorverWithStartPoint:item.startPoint EndPoint:item.endPoint];
+            [mainView sendSubviewToBack:pRecoderFileItem.curentCell];
+        }else{
+            ProcessVideoItem *item = [_proviewImgItems objectAtIndex:pRecoderFileItem.curentIndex.row];
+            item.startPoint = 0;
+            item.endPoint   = CGRectGetWidth(trFrame);
+            item.recType    = RecoderType_Duation;
+            [pRecoderFileItem.curentCell setCorverWithStartPoint:item.startPoint EndPoint:item.endPoint];
+            [mainView sendSubviewToBack:pRecoderFileItem.curentCell];
+        }
+        
+        
+        /// currCell 往后+1
+        pRecoderFileItem.curentIndex = [NSIndexPath indexPathForRow:pRecoderFileItem.curentIndex.row+1 inSection:0];
+        pRecoderFileItem.curentCell  = (AECollectionViewCell*)[mainView cellForItemAtIndexPath:pRecoderFileItem.curentIndex];
+        return;
+    }
+    
+    CGFloat startPoint;
+    
+    if (pRecoderFileItem.curentIndex.row == pRecoderFileItem.startIndex.row)
+    {
+        startPoint = pRecoderFileItem.startPoint;
+    }else{
+        startPoint = 0;
+    }
+    
+    [pRecoderFileItem.curentCell setCorverWithStartPoint:startPoint EndPoint:midX - CGRectGetMinX(trFrame)];
+    
+}
 
 -(void)viewDidLoad
 {

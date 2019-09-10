@@ -19,6 +19,7 @@
 		B6EFDF90232252C6009DADAA /* ProcessVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6EFDF8F232252C6009DADAA /* ProcessVideoViewController.xib */; };
 		B6EFDF94232255C1009DADAA /* ProcTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EFDF92232255C1009DADAA /* ProcTableViewCell.m */; };
 		B6EFDF95232255C1009DADAA /* ProcTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6EFDF93232255C1009DADAA /* ProcTableViewCell.xib */; };
+		B6EFDFBA2327398A009DADAA /* RecoderFileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EFDFB92327398A009DADAA /* RecoderFileItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +55,8 @@
 		B6EFDF91232255C1009DADAA /* ProcTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProcTableViewCell.h; sourceTree = "<group>"; };
 		B6EFDF92232255C1009DADAA /* ProcTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProcTableViewCell.m; sourceTree = "<group>"; };
 		B6EFDF93232255C1009DADAA /* ProcTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProcTableViewCell.xib; sourceTree = "<group>"; };
+		B6EFDFB82327398A009DADAA /* RecoderFileItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecoderFileItem.h; sourceTree = "<group>"; };
+		B6EFDFB92327398A009DADAA /* RecoderFileItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecoderFileItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 				B6EFDEF2231F8655009DADAA /* ProcessVideoViewController.h */,
 				B6EFDEF3231F8655009DADAA /* ProcessVideoViewController.m */,
 				B6EFDF8F232252C6009DADAA /* ProcessVideoViewController.xib */,
+				B6EFDFB82327398A009DADAA /* RecoderFileItem.h */,
+				B6EFDFB92327398A009DADAA /* RecoderFileItem.m */,
 				B6EFDF91232255C1009DADAA /* ProcTableViewCell.h */,
 				B6EFDF92232255C1009DADAA /* ProcTableViewCell.m */,
 				B6EFDF93232255C1009DADAA /* ProcTableViewCell.xib */,
@@ -229,6 +234,7 @@
 				B68EE00B2318C27B0033907A /* ViewController.m in Sources */,
 				B68EE0162318C27D0033907A /* main.cpp in Sources */,
 				B6EFDEF7231F98F2009DADAA /* AECollectionViewCell.m in Sources */,
+				B6EFDFBA2327398A009DADAA /* RecoderFileItem.m in Sources */,
 				B68EE0082318C27B0033907A /* AppDelegate.m in Sources */,
 				B6EFDF94232255C1009DADAA /* ProcTableViewCell.m in Sources */,
 			);

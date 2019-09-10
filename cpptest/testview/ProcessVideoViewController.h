@@ -19,6 +19,14 @@ typedef NS_ENUM(NSInteger,CutItemType)
     CutItemType_Splited, /// 处理后的图片
 };
 
+typedef NS_ENUM(NSInteger,RecoderType)
+{
+    RecoderType_None,
+    RecoderType_Start,
+    RecoderType_Duation, /// 切割线 保留原始图片，原始时间信息
+    RecoderType_End, /// 处理后的图片
+};
+
 
 @interface ProcessVideoItem:NSObject
 @property(nonatomic,assign)int    index;
@@ -32,6 +40,10 @@ typedef NS_ENUM(NSInteger,CutItemType)
 @property(nonatomic,retain)UIImage  *placeHodelImg;
 @property(nonatomic,weak)AVAssetImageGenerator *imageGenerator;
 @property(nonatomic,weak)AECollectionViewCell  *cell;
+
+@property(nonatomic,assign)RecoderType recType;
+@property(nonatomic,assign)CGFloat     startPoint;
+@property(nonatomic,assign)CGFloat     endPoint;
 
 -(void)LoadImage;
 @end

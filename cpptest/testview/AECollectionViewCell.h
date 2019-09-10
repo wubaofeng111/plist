@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)setCorver:(CGFloat)xValue;
 
+-(void)setCorverWithStartPoint:(CGFloat)startPt EndPoint:(CGFloat)endPt;
+
 @end
 
 NS_ASSUME_NONNULL_END

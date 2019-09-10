@@ -29,11 +29,9 @@
         self.backgroundColor = [UIColor whiteColor];
         _coverIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height - 35)];
         
-        self.clipsToBounds = YES;
+        self.clipsToBounds = NO;
         _coverIV.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:_coverIV];
-        
-        
         
         
         _nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(10, _coverIV.bounds.size.height, frame.size.width - 20, 35)];
@@ -41,7 +39,7 @@
         [self addSubview:_nameLbl];
         
         _tagView = [[UIView alloc]init];
-        _tagView.backgroundColor = [UIColor orangeColor];
+        _tagView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
         [self addSubview:_tagView];
         
         
@@ -82,15 +80,18 @@
 }
 
 
+-(void)setCorverWithStartPoint:(CGFloat)startPt EndPoint:(CGFloat)endPt
+{
+    _tagView.frame = CGRectMake(startPt, 0, endPt-startPt, self.frame.size.height);
+}
+
 -(void)setCorver:(CGFloat)xValue
 {
-    if (_tagView.frame.size.width == 0) {
-        _tagView.frame = CGRectMake(xValue, 0, 1, self.frame.size.height);
-    }else{
-        _tagView.frame = CGRectMake(_tagView.frame.origin.x, 0, xValue-_tagView.frame.origin.x, self.frame.size.height);
-    }
-    
-    
+//    if (_tagView.frame.size.width == 0) {
+//        _tagView.frame = CGRectMake(xValue, 0, 1, self.frame.size.height);
+//    }else{
+//        _tagView.frame = CGRectMake(_tagView.frame.origin.x, 0, xValue-_tagView.frame.origin.x, self.frame.size.height);
+//    }
 }
 
 @end

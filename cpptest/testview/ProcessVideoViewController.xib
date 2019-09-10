@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="TagView" destination="FBc-uT-hF0" id="hq0-9f-5Vw"/>
                 <outlet property="mTableView" destination="pzi-Fv-87D" id="mnr-NW-CuB"/>
+                <outlet property="mTagView" destination="1Qa-FQ-maA" id="4pc-zl-U5Y"/>
                 <outlet property="mainView" destination="zyH-C0-e1q" id="gWp-xA-gCt"/>
                 <outlet property="view" destination="iN0-l3-epB" id="eKm-FT-B78"/>
             </connections>
@@ -24,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pzi-Fv-87D">
-                    <rect key="frame" x="0.0" y="144" width="414" height="678"/>
+                    <rect key="frame" x="0.0" y="189" width="414" height="633"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="ceM-e8-KCo"/>
@@ -32,7 +33,7 @@
                     </connections>
                 </tableView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="zyH-C0-e1q">
-                    <rect key="frame" x="0.0" y="44" width="414" height="100"/>
+                    <rect key="frame" x="0.0" y="89" width="414" height="100"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="TVp-UB-L4o"/>
@@ -45,7 +46,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBc-uT-hF0">
-                    <rect key="frame" x="203.5" y="44" width="7" height="100"/>
+                    <rect key="frame" x="203.5" y="89" width="7" height="100"/>
                     <color key="backgroundColor" red="0.98755000000000004" green="0.27256999999999998" blue="0.31669999999999998" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="7" id="OGm-eb-axP"/>
@@ -65,16 +66,25 @@
                         <action selector="startCorver:" destination="-1" eventType="touchUpInside" id="tyS-8S-8aa"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Qa-FQ-maA">
+                    <rect key="frame" x="190" y="44" width="34.5" height="45"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="1Qa-FQ-maA" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="23S-Aw-SIQ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="hCz-nF-bhI" secondAttribute="bottom" constant="2" id="6pU-sF-bqa"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pzi-Fv-87D" secondAttribute="trailing" id="9yg-RB-pO2"/>
                 <constraint firstItem="zyH-C0-e1q" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="BhD-iu-oRF"/>
                 <constraint firstItem="MkO-Lm-J45" firstAttribute="centerY" secondItem="hCz-nF-bhI" secondAttribute="centerY" id="EnD-X8-0XA"/>
+                <constraint firstItem="zyH-C0-e1q" firstAttribute="top" secondItem="1Qa-FQ-maA" secondAttribute="bottom" id="F7A-8t-4op"/>
+                <constraint firstItem="1Qa-FQ-maA" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="GaS-07-x2s"/>
                 <constraint firstItem="FBc-uT-hF0" firstAttribute="top" secondItem="zyH-C0-e1q" secondAttribute="top" id="H0b-me-bnl"/>
                 <constraint firstItem="zyH-C0-e1q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="I27-HM-AyX"/>
-                <constraint firstItem="zyH-C0-e1q" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="NtH-Nv-1oY"/>
+                <constraint firstItem="zyH-C0-e1q" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="45" id="NtH-Nv-1oY"/>
                 <constraint firstItem="hCz-nF-bhI" firstAttribute="top" secondItem="pzi-Fv-87D" secondAttribute="bottom" id="Tot-f7-oxF"/>
                 <constraint firstItem="FBc-uT-hF0" firstAttribute="bottom" secondItem="zyH-C0-e1q" secondAttribute="bottom" id="USE-8t-7vo"/>
                 <constraint firstItem="pzi-Fv-87D" firstAttribute="top" secondItem="zyH-C0-e1q" secondAttribute="bottom" id="X9A-TO-jfS"/>
@@ -85,7 +95,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pzi-Fv-87D" secondAttribute="bottom" constant="40" id="swV-a5-16e"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-668" y="-150"/>
+            <point key="canvasLocation" x="161" y="-182"/>
         </view>
     </objects>
 </document>
