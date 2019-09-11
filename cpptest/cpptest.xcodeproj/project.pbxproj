@@ -202,6 +202,7 @@
 		B6EFE1F323278504009DADAA /* GPUImageDarkenBlendFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EFE13923278504009DADAA /* GPUImageDarkenBlendFilter.m */; };
 		B6EFE1F72327868D009DADAA /* SimpleVideoFileFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6EFE1F52327868C009DADAA /* SimpleVideoFileFilterViewController.xib */; };
 		B6EFE1F82327868D009DADAA /* SimpleVideoFileFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6EFE1F62327868C009DADAA /* SimpleVideoFileFilterViewController.m */; };
+		B6EFE1FA232798C8009DADAA /* File in Resources */ = {isa = PBXBuildFile; fileRef = B6EFE1F9232798C8009DADAA /* File */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -600,6 +601,7 @@
 		B6EFE1F42327868C009DADAA /* SimpleVideoFileFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleVideoFileFilterViewController.h; sourceTree = "<group>"; };
 		B6EFE1F52327868C009DADAA /* SimpleVideoFileFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleVideoFileFilterViewController.xib; sourceTree = "<group>"; };
 		B6EFE1F62327868C009DADAA /* SimpleVideoFileFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleVideoFileFilterViewController.m; sourceTree = "<group>"; };
+		B6EFE1F9232798C8009DADAA /* File */ = {isa = PBXFileReference; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -675,6 +677,7 @@
 				B68EE0112318C27D0033907A /* LaunchScreen.storyboard */,
 				B68EE0142318C27D0033907A /* Info.plist */,
 				B68EE0152318C27D0033907A /* main.cpp */,
+				B6EFE1F9232798C8009DADAA /* File */,
 			);
 			path = testview;
 			sourceTree = "<group>";
@@ -1154,6 +1157,7 @@
 				B6EFDF90232252C6009DADAA /* ProcessVideoViewController.xib in Resources */,
 				B6EFDF95232255C1009DADAA /* ProcTableViewCell.xib in Resources */,
 				B6EFDFBF23276F80009DADAA /* BFAVPlayerViewController.xib in Resources */,
+				B6EFE1FA232798C8009DADAA /* File in Resources */,
 				B6EFE13A23278504009DADAA /* lookup_soft_elegance_2.png in Resources */,
 				B68EE0132318C27D0033907A /* LaunchScreen.storyboard in Resources */,
 				B6EFE13D23278504009DADAA /* lookup_amatorka.png in Resources */,

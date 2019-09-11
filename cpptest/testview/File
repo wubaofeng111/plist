@@ -1,0 +1,27 @@
+//创建相机(注意:当前vc需持有camera, 否则会提前释放)
+camera = [[GPUImageVideoCamera alloc]initWithSessionPreset:AVCaptureSessionPresetHigh cameraPosition:AVCaptureDevicePositionFront];
+camera.outputImageOrientation = UIInterfaceOrientationPortrait;
+
+//创建最终预览视图 view
+GPUImageView *cameraView = [[GPUImageView alloc]initWithFrame:self.view.frame];
+[self.view insertSubview:cameraView atIndex:0];
+
+
+//创建滤镜组合: 磨皮,美白
+GPUImageFilterGroup *groupFilter = [[GPUImageFilterGroup alloc]init];
+//磨皮滤镜
+GPUImageBilateralFilter *bilateralFilter = [[GPUImageBilateralFilter alloc]init];
+[groupFilter addTarget:bilateralFilter];
+//美白滤镜
+GPUImageBrightnessFilter *brightFilter = [[GPUImageBrightnessFilter alloc]init];
+[groupFilter addTarget:brightFilter];
+//设置滤镜组链
+[bilateralFilter addTarget:brightFilter];
+[groupFilter setInitialFilters:@[bilateralFilter]];
+groupFilter.terminalFilter = brightFilter;
+//设置 GPUImage 处理链,从数据源->滤镜->最终页面效果
+[camera addTarget:groupFilter];
+[groupFilter addTarget:cameraView];
+
+//相机开始捕获
+[camera startCameraCapture];

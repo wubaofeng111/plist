@@ -1,47 +1,106 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment defaultVersion="1024" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SimpleVideoFileFilterViewController">
             <connections>
+                <outlet property="mGPUImage" destination="5HH-Sn-9WC" id="PJy-SK-LI6"/>
+                <outlet property="mPlayerView" destination="i2u-hq-bxb" id="t2r-IB-WDs"/>
                 <outlet property="progressLabel" destination="0Bh-Mw-8m8" id="iXn-m6-F5Y"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="1" customClass="GPUImageView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="760"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000149011612" minValue="0.0" maxValue="0.20000000298023224" id="4">
-                    <rect key="frame" x="18" y="432" width="284" height="29"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.10000000149011612" minValue="0.0" maxValue="0.20000000298023224" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                    <rect key="frame" x="22" y="730" width="284" height="31"/>
                     <connections>
                         <action selector="updatePixelWidth:" destination="-1" eventType="valueChanged" id="5"/>
                     </connections>
                 </slider>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a1V-Qt-sTP">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progress :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1V-Qt-sTP">
                     <rect key="frame" x="176" y="27" width="86" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.38982780612244894" green="0.38982780612244894" blue="0.38982780612244894" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.38982780612244894" green="0.38982780612244894" blue="0.38982780612244894" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Bh-Mw-8m8">
-                    <rect key="frame" x="262" y="27" width="48" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.38982780610000001" green="0.38982780610000001" blue="0.38982780610000001" alpha="1" colorSpace="calibratedRGB"/>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aJu-NZ-fcU">
+                    <rect key="frame" x="22" y="692" width="282" height="31"/>
+                    <connections>
+                        <action selector="changeTime:" destination="-1" eventType="valueChanged" id="Ovz-wp-dku"/>
+                    </connections>
+                </slider>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HH-Sn-9WC" customClass="GPUImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="Y3c-2A-Rig"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bh-Mw-8m8">
+                    <rect key="frame" x="259.5" y="663.5" width="42.5" height="20.5"/>
+                    <color key="backgroundColor" red="0.38982780610000001" green="0.38982780610000001" blue="0.38982780610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2u-hq-bxb">
+                    <rect key="frame" x="0.0" y="300" width="320" height="300"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="Gim-dP-5D3"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcm-QF-oAK">
+                    <rect key="frame" x="32" y="634" width="30" height="30"/>
+                    <state key="normal" title="play"/>
+                    <connections>
+                        <action selector="play:" destination="-1" eventType="touchUpInside" id="EHr-N4-ofS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B09-UI-Kg5">
+                    <rect key="frame" x="253" y="634" width="42" height="30"/>
+                    <state key="normal" title="pause"/>
+                    <connections>
+                        <action selector="pause:" destination="-1" eventType="touchUpInside" id="8we-Pg-LtT"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="aJu-NZ-fcU" firstAttribute="top" secondItem="B09-UI-Kg5" secondAttribute="bottom" constant="28" id="A1s-Bx-yHO"/>
+                <constraint firstAttribute="trailing" secondItem="i2u-hq-bxb" secondAttribute="trailing" id="BbL-ek-gzi"/>
+                <constraint firstItem="jcm-QF-oAK" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="32" id="G5W-BZ-IZc"/>
+                <constraint firstItem="4" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="24" id="H74-hg-s9J"/>
+                <constraint firstItem="4" firstAttribute="top" secondItem="aJu-NZ-fcU" secondAttribute="bottom" constant="8" id="KPS-Kx-fCm"/>
+                <constraint firstItem="i2u-hq-bxb" firstAttribute="top" secondItem="5HH-Sn-9WC" secondAttribute="bottom" id="Kzf-ID-yrO"/>
+                <constraint firstItem="aJu-NZ-fcU" firstAttribute="top" secondItem="jcm-QF-oAK" secondAttribute="bottom" constant="28" id="Qgu-bj-qYr"/>
+                <constraint firstItem="aJu-NZ-fcU" firstAttribute="top" secondItem="0Bh-Mw-8m8" secondAttribute="bottom" constant="8" id="WHn-bs-uUH"/>
+                <constraint firstAttribute="trailing" secondItem="4" secondAttribute="trailing" constant="16" id="a4u-Zf-TIw"/>
+                <constraint firstAttribute="bottom" secondItem="4" secondAttribute="bottom" id="b0G-6Y-NSr"/>
+                <constraint firstItem="5HH-Sn-9WC" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="cam-0B-gHa"/>
+                <constraint firstAttribute="trailing" secondItem="0Bh-Mw-8m8" secondAttribute="trailing" constant="18" id="iOR-lV-aLY"/>
+                <constraint firstItem="5HH-Sn-9WC" firstAttribute="top" secondItem="1" secondAttribute="top" id="jwA-mo-Q0M"/>
+                <constraint firstItem="aJu-NZ-fcU" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="24" id="rkI-ee-qx4"/>
+                <constraint firstAttribute="trailing" secondItem="B09-UI-Kg5" secondAttribute="trailing" constant="25" id="uOh-e0-PVV"/>
+                <constraint firstItem="i2u-hq-bxb" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="uoq-B5-PWj"/>
+                <constraint firstAttribute="trailing" secondItem="aJu-NZ-fcU" secondAttribute="trailing" constant="18" id="y9w-b9-0kz"/>
+                <constraint firstAttribute="trailing" secondItem="5HH-Sn-9WC" secondAttribute="trailing" id="zuq-EZ-Os8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-1354" y="-18"/>
         </view>
     </objects>
 </document>

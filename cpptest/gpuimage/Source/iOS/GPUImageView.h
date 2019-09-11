@@ -15,6 +15,8 @@ typedef NS_ENUM(NSUInteger, GPUImageFillModeType) {
 @interface GPUImageView : UIView <GPUImageInput>
 {
     GPUImageRotationMode inputRotation;
+    CGSize               size;
+    CGRect               pBounds;
 }
 
 /** The fill mode dictates how images are fit in the view, with the default being kGPUImageFillModePreserveAspectRatio

@@ -363,6 +363,8 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
     });
 }
 
+static BOOL firstBuffer = YES;
+
 - (void)processAudioBuffer:(CMSampleBufferRef)audioBuffer;
 {
     if (!isRecording || _paused)
@@ -466,6 +468,14 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
             }
             else if(assetWriter.status == AVAssetWriterStatusWriting)
             {
+                CFDictionaryRef dict = NULL;
+                if (firstBuffer) {
+                    firstBuffer = NO;
+                    dict = CMTimeCopyAsDictionary(CMTimeMake(1024, 44100), kCFAllocatorDefault);
+                    CMSetAttachment(audioBuffer, kCMSampleBufferAttachmentKey_TrimDurationAtStart, dict, kCMAttachmentMode_ShouldNotPropagate);
+                }
+                
+                
                 if (![assetWriterAudioInput appendSampleBuffer:audioBuffer])
                     NSLog(@"Problem appending audio buffer at time: %@", CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, currentSampleTime)));
             }
